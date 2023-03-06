@@ -1,10 +1,13 @@
-function App() {
+import { Route } from "./routes";
+
+export const App = () => {
   return (
-  <div>
-  <h1>
-  Olá mundo!
-  </h1>
-  </div>
-  )}
+    <div className="ef-glow">
+      <div>
+      <Route />
+      </div>
+    </div>
+  );
+}
   
   export default App
