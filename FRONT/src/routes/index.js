@@ -1,14 +1,13 @@
-import { BrowserRouter, Routes } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "../pages/login";
 
-
-export const Route = () => {
-  const Switch = Routes
+export const ListRoutes = () => {
   return (
     <BrowserRouter>
-      <Switch>
-        <Route path="/" exact component={Login}/>
-      </Switch>
+      <Routes>
+        <Route path="/" exact element={<Login />} />
+      </Routes>
     </BrowserRouter>
   );
 };
+

@@ -25,21 +25,20 @@ function getCreateUser() {
 }
 getCreateUser();
 //---------------------------------------------------------
-export const endpointListAllUser = () => {
-  function getListUsers() {
-    // eslint-disable-next-line no-undef
-    axios
-      .get(listUsersUrl)
-      .then((response) => {
-        const data = response.data;
-        // eslint-disable-next-line no-undef
-        renderResultMes.textContent = JSON.stringify(data);
-        //console.log(data);
-      })
-      .catch((error) => console.log(error));
-  }
-  //return getListUsers();
-};
+function getListUsers() {
+  // eslint-disable-next-line no-undef
+  axios
+    .get(listUsersUrl)
+    .then((response) => {
+      const data = response.data;
+      // eslint-disable-next-line no-undef
+      renderResultMes.textContent = JSON.stringify(data);
+      //console.log(data);
+    })
+    .catch((error) => console.log(error));
+}
+getListUsers();
+
 //---------------------------------------------------------
 function getListOneUser() {
   // eslint-disable-next-line no-undef

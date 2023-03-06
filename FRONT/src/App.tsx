@@ -1,10 +1,10 @@
-import { Route } from "./routes";
+import { ListRoutes } from "./routes";
 
 export const App = () => {
   return (
     <div className="ef-glow">
       <div>
-      <Route />
+      <ListRoutes />
       </div>
     </div>
   );

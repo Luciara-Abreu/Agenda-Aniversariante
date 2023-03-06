@@ -7,10 +7,14 @@ class EndpointListAllUser {
       .get(listUsersUrl)
       .then((response) => {
         const data = response.data;
-        const textContent = JSON.stringify(data);
-        console.log(textContent);
+        //const textContent = JSON.stringify(data);
+        console.log(JSON.stringify(data));
       })
       .catch((error) => console.log(error));
   }
 }
 export default EndpointListAllUser;
+
+
+
+
