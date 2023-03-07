@@ -23,7 +23,7 @@ function getCreateUser() {
     })
     .catch((error) => console.log(error));
 }
-getCreateUser();
+//getCreateUser();
 //---------------------------------------------------------
 function getListUsers() {
   // eslint-disable-next-line no-undef

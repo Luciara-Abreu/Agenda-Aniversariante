@@ -1,23 +1,17 @@
+import Login from "../../../pages/login";
 import axios from "axios";
 const authUrl = "http://localhost:8081/AuthAdm";
 
-
-const addAuth = {
-  name: "Catarina Master",
-  email: "catarina.m@gmail.com",
-}
-
-class EndpointListAllUser {
-public getUpdateUser() {
-  // eslint-disable-next-line no-undef
+function getdataAdm() {
   axios
-    .put(`${updateUserUrl}/id`, addAuth)
+    .post(authUrl)
     .then((response) => {
-      console.log(response.data);
-      alert(JSON.stringify(response.data));
+      const data = response.data;
+      console.log("dados do envio ====> ", data);
+      return JSON.stringify(data);
     })
-    .catch((error) => console.log(error));
+    .catch((error) => console.log(error.response.data));
 }
-}
+//getdataAdm();
 
-export default EndpointListAllUser
+export default getdataAdm;
