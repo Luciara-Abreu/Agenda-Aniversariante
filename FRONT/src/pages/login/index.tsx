@@ -2,12 +2,9 @@ import cake from "../../shared/assets/Gifs/cake2.gif";
 import * as S from "./styles";
 import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AppError from "../../shared/errors/AppError";
-import sendAuthAdm from "../../apiAxios/endPoints/authEndPoint/authEndPoint";
 
 import axios from "axios";
 const authUrl = "http://localhost:8081/AuthAdm";
-
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -31,28 +28,39 @@ const Login = () => {
     password,
   };
 
-  /**  
-    const handleSubmit = (e: any) => {
-    e.preventDefault();
-    console.log("submit ==> ", e.target);
+  const getdataAdm = async () => {
+    const response = await axios.post(authUrl, eventData);
+    const data = response.data;
+    if (!data) {
+      alert(data);
+    }
+    localStorage.setItem("Token", JSON.stringify(data.token));
+    localStorage.setItem("Name", JSON.stringify(data.adm.name));
+    localStorage.setItem(
+      "sexualOrientation",
+      JSON.stringify(data.adm.sexualOrientation)
+    );
+    console.log(
+      "sexualOrientation ====> ",
+      JSON.stringify(data.adm.sexualOrientation)
+    );
+    return JSON.stringify(data);
   };
-   */
 
-  function getdataAdm() {
-    axios
-      .post(authUrl, eventData)
-      .then((response) => {
-        const data = response.data;
-        console.log("dados do envio ====> ", data);
-        return JSON.stringify(data);
-      })
-      .catch((error) => console.log(error.response.data));
-  }
-  getdataAdm();
+  const handleSendAuthenticationAdm = () => {
+    const messageError = "E-mail ou senha invalida, Entre com seus dados";
+    try {
+      getdataAdm();
+      history("/Dashboard");
+    } catch (error) {
+      console.log(messageError);
+      alert(messageError);
+    }
+  };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log("submit ==> ", e.target);
+    //console.log("submit");
   };
 
   return (
@@ -97,7 +105,7 @@ const Login = () => {
 
               <S.ContainerLoginFormBtn className="actions">
                 <button
-                  //onClick={handleSubmit}
+                  onClick={handleSendAuthenticationAdm}
                   className="login-form-btn"
                   type="submit"
                 >
@@ -120,4 +128,5 @@ const Login = () => {
 };
 
 export default Login;
+
 //  <AuthGoogle />

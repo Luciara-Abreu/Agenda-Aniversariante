@@ -15,6 +15,3 @@ class EndpointListAllUser {
 }
 export default EndpointListAllUser;
 
-
-
-

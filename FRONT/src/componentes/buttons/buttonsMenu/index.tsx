@@ -16,6 +16,8 @@ const ButtonsMenu = (props:Props) =>{
     localStorage.setItem('authToken', token);
 }
 
+var storage = localStorage.getItem("Name");
+console.log("GET name ==> ", storage);
 
   const history = useNavigate(); 
   const handleClickHome = () => {
