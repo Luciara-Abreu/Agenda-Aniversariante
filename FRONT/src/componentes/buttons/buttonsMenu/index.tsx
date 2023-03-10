@@ -1,73 +1,62 @@
 import React, { useState } from 'react'
-import { useNavigate } from "react-router-dom";
-import { ContainerButton } from './styles';
-//import { auth } from '../../../../libs/firebase'
-//import { signOut } from 'firebase/auth';
-import { IUserType } from '../../../shared/interfaces/User';
+import { useNavigate } from 'react-router-dom'
+import { ContainerButton } from './styles'
+import { IUserType } from '../../../shared/interfaces/User'
 
+type Props = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
 
+const ButtonsMenu = (props: Props) => {
+  const [user, setUser] = useState<IUserType | null>(null)
+  const [token, setToken] = useState(null)
 
-type Props = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> 
+  const auth = localStorage.getItem('Token')
 
-const ButtonsMenu = (props:Props) =>{   
-  const [user, setUser] = useState<IUserType | null>(null);
+  const history = useNavigate()
 
-  const setToken = (token: string) => {
-    localStorage.setItem('authToken', token);
-}
-
-var storage = localStorage.getItem("Name");
-console.log("GET name ==> ", storage);
-
-  const history = useNavigate(); 
   const handleClickHome = () => {
     history('/Dashboard')
-  }  
-  
+  }
+
   const handleClickAddAniver = () => {
     history('/addAniver')
-  }  
+  }
 
   const handleClickTop10 = () => {
     history('/Top10')
-  }  
+  }
 
   const handleClickConsultaMes = () => {
     history('/consultaMes')
-  }  
-
-  const handleLogout = async () => {
   }
-  
-  /*const handleLogout = async () => {
-    await signOut(auth).then(() => {
-      setUser(null);
-      setToken('');
+
+  const handleLogout = () => {    
+    const authExist = auth
+
+    if (authExist) {
+      setUser(null)
+      setToken(null)
+      localStorage.clear()
       history('/')
-    })
-    if (localStorage.getItem("auth") !== null) {
-      console.log('Usuário logadaço ===>',auth)
-  }else {
-    console.log('Usuário deslogadaço ===>', user)
-  }   }
-*/
+    }
+    if (localStorage.getItem('auth') !== null) {
+      console.log('Usuário logadaço ===>', auth)
+    } else {
+      console.log('Usuário deslogadaço com sussesso!')
+    }
+  }
 
   return (
-<ContainerButton>
-<button {...props}  className="btn third" onClick={handleClickHome}>DashBoard</button>
-<button {...props}  className="btn third" onClick={handleClickTop10}>Top 10</button>
-<button {...props}  className="btn third" onClick={handleClickConsultaMes}>Consulta Mes</button>
-<button {...props}  className="btn third" onClick={handleClickAddAniver}>Add Aniver</button>
-<button {...props}  className="btn third" onClick={handleLogout}> Sair</button>
-
-</ContainerButton>
+    <ContainerButton>
+  <button {...props}  className="btn third" onClick={handleClickHome}>DashBoard</button>
+  <button {...props}  className="btn third" onClick={handleClickTop10}>Top 10</button>
+  <button {...props}  className="btn third" onClick={handleClickConsultaMes}>Consulta Mes</button>
+  <button {...props}  className="btn third" onClick={handleClickAddAniver}>Add Aniver</button>
+{auth !== null && (
+  <button {...props}  className="btn third" onClick={handleLogout}> Sair</button>
   )}
-
+</ContainerButton>
+  )
+}
 
 export default ButtonsMenu
 
-/**
- * {auth !== null && (
-  <button {...props}  className="btn third" onClick={handleLogout}> Sair</button>
-  )}
- */
