@@ -27,7 +27,6 @@ class CreateAdmService {
       email,
       lastEmail,
       fone,
-      avatar,
       password: hashedPassword,
     })
 
