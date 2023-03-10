@@ -1,76 +1,68 @@
-import cake from "../../shared/assets/Gifs/cake2.gif";
-import * as S from "./styles";
-import { ChangeEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import cake from '../../shared/assets/Gifs/cake2.gif'
+import * as S from './styles'
+import { ChangeEvent, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-import axios from "axios";
-const authUrl = "http://localhost:8081/AuthAdm";
+import axios from 'axios'
+const authUrl = 'http://localhost:8081/AuthAdm'
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
-  const history = useNavigate();
+  const history = useNavigate()
   const handleClick = () => {
-    history("/criarConta");
-  };
+    history('/criarConta')
+  }
 
   const handleEmailInput = (event: ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
-  };
+    setEmail(event.target.value)
+  }
 
   const handlePasswordInput = (event: ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-  };
+    setPassword(event.target.value)
+  }
 
   const eventData = {
     email,
     password,
-  };
+  }
 
   const getdataAdm = async () => {
-    const response = await axios.post(authUrl, eventData);
-    const data = response.data;
-    if (!data) {
-      alert(data);
-    }
-    localStorage.setItem("Token", JSON.stringify(data.token));
-    localStorage.setItem("Name", JSON.stringify(data.adm.name));
-    localStorage.setItem(
-      "sexualOrientation",
-      JSON.stringify(data.adm.sexualOrientation)
-    );
-    console.log(
-      "sexualOrientation ====> ",
-      JSON.stringify(data.adm.sexualOrientation)
-    );
-    return JSON.stringify(data);
-  };
+    const response = await axios.post(authUrl, eventData)
+    const data = response.data
+    localStorage.setItem('DataStorage', JSON.stringify(data))
+    localStorage.setItem('TokenStorage', data.token)
+    localStorage.setItem('NameStorage', data.adm.name)
+    localStorage.setItem('sexualOrientationStorage', data.adm.sexualOrientation)
+    localStorage.setItem('EmailStorage', data.adm.email)
+    localStorage.setItem('PasswordStorage', data.adm.password)
+    console.log('DataStorage ====> ', JSON.stringify(data))
+    return JSON.stringify(data)
+  }
 
   const handleSendAuthenticationAdm = () => {
-    const messageError = "E-mail ou senha invalida, Entre com seus dados";
+    const messageError = 'E-mail ou senha invalida, Entre com seus dados'
     try {
-      getdataAdm();
+      getdataAdm()
       history("/Dashboard");
     } catch (error) {
-      console.log(messageError);
-      alert(messageError);
+      console.log(messageError)
+      alert(messageError)
     }
-  };
+  }
 
   const handleSubmit = (e: any) => {
-    e.preventDefault();
+    e.preventDefault()
     //console.log("submit");
-  };
+  }
 
   return (
     <S.Container>
       <S.ContainerLogin>
         <S.WrapLogin>
           <S.LoginForm>
-            <S.LoginFormTitle>
-              Bem vindo ao App de Aniversariantes
-            </S.LoginFormTitle>
+            <S.LoginFormTitle>Bem vindo ao App de Aniversariantes</S.LoginFormTitle>
             <S.DivLogo>
               <S.LogoForm>
                 <img src={cake} alt="CakeNiver" />
@@ -80,35 +72,18 @@ const Login = () => {
             <form className="form" onSubmit={handleSubmit}>
               <S.ContainerInput>
                 <S.WrapInput>
-                  <input
-                    className={email !== "" ? "has-val input" : "input"}
-                    type="email"
-                    value={email}
-                    onChange={handleEmailInput}
-                  />
+                  <input className={email !== '' ? 'has-val input' : 'input'} type="email" value={email} onChange={handleEmailInput} />
                   <span className="FocusInput" data-placeholder="Email"></span>
                 </S.WrapInput>
 
                 <S.WrapInput>
-                  <input
-                    className={password !== "" ? "has-val input" : "input"}
-                    type="password"
-                    value={password}
-                    onChange={handlePasswordInput}
-                  />
-                  <span
-                    className="FocusInput"
-                    data-placeholder="Password"
-                  ></span>
+                  <input className={password !== '' ? 'has-val input' : 'input'} type="password" value={password} onChange={handlePasswordInput} />
+                  <span className="FocusInput" data-placeholder="Password"></span>
                 </S.WrapInput>
               </S.ContainerInput>
 
               <S.ContainerLoginFormBtn className="actions">
-                <button
-                  onClick={handleSendAuthenticationAdm}
-                  className="login-form-btn"
-                  type="submit"
-                >
+                <button onClick={handleSendAuthenticationAdm} className="login-form-btn" type="submit">
                   Login
                 </button>
               </S.ContainerLoginFormBtn>
@@ -124,9 +99,9 @@ const Login = () => {
         </S.WrapLogin>
       </S.ContainerLogin>
     </S.Container>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login
 
 //  <AuthGoogle />
