@@ -29,10 +29,9 @@ const ButtonsMenu = (props: Props) => {
     history('/consultaMes')
   }
 
-  const handleLogout = () => {    
-    const authExist = auth
-
-    if (authExist) {
+  const existTokn = localStorage.getItem('TokenStorage')
+  const handleLogout = () => {
+    if (existTokn) {
       setUser(null)
       setToken(null)
       localStorage.clear()
@@ -42,21 +41,32 @@ const ButtonsMenu = (props: Props) => {
       console.log('Usuário logadaço ===>', auth)
     } else {
       console.log('Usuário deslogadaço com sussesso!')
+      alert('Usuário deslogadaço com sussesso!')
     }
   }
 
   return (
     <ContainerButton>
-  <button {...props}  className="btn third" onClick={handleClickHome}>DashBoard</button>
-  <button {...props}  className="btn third" onClick={handleClickTop10}>Top 10</button>
-  <button {...props}  className="btn third" onClick={handleClickConsultaMes}>Consulta Mes</button>
-  <button {...props}  className="btn third" onClick={handleClickAddAniver}>Add Aniver</button>
-{auth !== null && (
-  <button {...props}  className="btn third" onClick={handleLogout}> Sair</button>
-  )}
-</ContainerButton>
+      <button {...props} className="btn third" onClick={handleClickHome}>
+        DashBoard
+      </button>
+      <button {...props} className="btn third" onClick={handleClickTop10}>
+        Top 10
+      </button>
+      <button {...props} className="btn third" onClick={handleClickConsultaMes}>
+        Consulta Mes
+      </button>
+      <button {...props} className="btn third" onClick={handleClickAddAniver}>
+        Add Aniver
+      </button>
+      {existTokn && (
+        <button {...props} className="btn third" onClick={handleLogout}>
+          {' '}
+          Sair
+        </button>
+      )}
+    </ContainerButton>
   )
 }
 
 export default ButtonsMenu
-
