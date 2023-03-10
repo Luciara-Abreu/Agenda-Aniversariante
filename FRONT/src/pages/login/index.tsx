@@ -45,7 +45,7 @@ const Login = () => {
     const messageError = 'E-mail ou senha invalida, Entre com seus dados'
     try {
       getdataAdm()
-      history("/Dashboard");
+      history('/Dashboard')
     } catch (error) {
       console.log(messageError)
       alert(messageError)
